@@ -1,0 +1,29 @@
+{
+  "name": "ejercicio1",
+  "version": "1.0.0",
+  "description": "Servicio que retorna la cantidad solicitada de numeros de la serie de Fibonacci",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Exe773/practico1Back.git"
+  },
+  "keywords": [
+    "Fibonacci"
+  ],
+  "author": "Ferreira Exequiel y Fiocchi Viviana",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Exe773/practico1Back/issues"
+  },
+  "homepage": "https://github.com/Exe773/practico1Back#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
