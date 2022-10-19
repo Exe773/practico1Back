@@ -3,6 +3,18 @@ const getUsers = (req, res) => {
   res.status(200).send(obj);
 };
 
+const getUsersById = (req, res) => {
+  let obj = JSON.parse(process.env.USERS_ARRAY);
+  let isInArray = obj.some((obj) => obj.ID === req.params.id);
+
+  if (isInArray) {
+    let user = obj.find((obj) => obj.ID === req.params.id);
+    res.status(200).send(user);
+  } else {
+    res.status(404).send("No existe el ID solicitado");
+  }
+};
+
 const createUser = (req, res) => {
   process.env.ID_USERS++;
 
@@ -47,4 +59,5 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
+  getUsersById,
 };
