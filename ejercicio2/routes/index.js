@@ -11,6 +11,8 @@ const { userController } = require("../controllers");
 
 api.get("/users", userController.getUsers);
 api.post("/users", userController.createUser);
+api.put("/users/:id", userController.updateUser);
+api.delete("/users/:id", userController.deleteUser);
 
 /** END ROUTES **/
 

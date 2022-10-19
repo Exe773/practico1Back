@@ -8,7 +8,7 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use("/api", routes);
+app.use("/", routes);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server started on port: ${process.env.PORT}`);
