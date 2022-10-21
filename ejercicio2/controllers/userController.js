@@ -19,17 +19,22 @@ const createUser = (req, res) => {
   process.env.ID_USERS++;
 
   let obj = JSON.parse(process.env.USERS_ARRAY);
-
-  obj.push({
+  let newUser = {
     ID: process.env.ID_USERS,
     Nombre: req.body.Nombre,
     Apellido: req.body.Apellido,
     DNI: req.body.DNI,
-  });
+  };
 
-  process.env.USERS_ARRAY = JSON.stringify(obj);
+  let isUserExits = obj.some((obj) => obj.DNI === req.body.DNI);
 
-  res.status(200).send("El usuario fue creado exitosamente!");
+  if (isUserExits) {
+    res.status(200).send("El DNI ya existe");
+  } else {
+    obj.push(newUser);
+    process.env.USERS_ARRAY = JSON.stringify(obj);
+    res.status(200).send("El usuario fue creado exitosamente!");
+  }
 };
 
 const updateUser = (req, res) => {
@@ -54,10 +59,35 @@ const deleteUser = (req, res) => {
   res.status(200).send("El usuario fue eliminado exitosamente!");
 };
 
+const filterUsers = (req, res) => {
+  let obj = JSON.parse(process.env.USERS_ARRAY);
+  let userFind = [];
+  let newObj = obj.filter(
+    (obj) =>
+      obj.Apellido === req.body.Apellido || obj.Nombre === req.body.Nombre
+  );
+
+  newObj.map((user) => {
+    if (
+      user.Nombre === req.body.Nombre &&
+      user.Apellido === req.body.Apellido
+    ) {
+      userFind.push(user);
+    }
+  });
+
+  if (userFind.length > 0) {
+    res.status(200).send(userFind);
+  } else {
+    res.status(200).send(newObj);
+  }
+};
+
 module.exports = {
   getUsers,
   createUser,
   updateUser,
   deleteUser,
   getUsersById,
+  filterUsers,
 };
