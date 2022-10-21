@@ -1,0 +1,135 @@
+{
+	"info": {
+		"_postman_id": "08650eea-773d-4ff5-a6a5-d2ed05eccea0",
+		"name": "EJERCICIO 1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23899050"
+	},
+	"item": [
+		{
+			"name": "GET SIN PARAMETRO",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/fibo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"fibo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - PARAMETRO 4",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/fibo/?num=4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"fibo",
+						""
+					],
+					"query": [
+						{
+							"key": "num",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - PARAMETRO ERRONEO (-1)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/fibo?num=-1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"fibo"
+					],
+					"query": [
+						{
+							"key": "num",
+							"value": "-1"
+						},
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - PARAMETRO ERRONEO (STRING)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/fibo?num=\"Hola\"",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"fibo"
+					],
+					"query": [
+						{
+							"key": "num",
+							"value": "\"Hola\""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET -PARAMETRO 10",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/fibo?num=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"fibo"
+					],
+					"query": [
+						{
+							"key": "num",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
