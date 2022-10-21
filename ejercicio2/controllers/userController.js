@@ -16,47 +16,64 @@ const getUsersById = (req, res) => {
 };
 
 const createUser = (req, res) => {
-  process.env.ID_USERS++;
-
   let obj = JSON.parse(process.env.USERS_ARRAY);
-  let newUser = {
-    ID: process.env.ID_USERS,
-    Nombre: req.body.Nombre,
-    Apellido: req.body.Apellido,
-    DNI: req.body.DNI,
-  };
 
   let isUserExits = obj.some((obj) => obj.DNI === req.body.DNI);
 
   if (isUserExits) {
     res.status(200).send("El DNI ya existe");
   } else {
+    process.env.ID_USERS++;
+    let newUser = {
+      ID: process.env.ID_USERS,
+      Nombre: req.body.Nombre,
+      Apellido: req.body.Apellido,
+      DNI: req.body.DNI,
+    };
+
     obj.push(newUser);
     process.env.USERS_ARRAY = JSON.stringify(obj);
-    res.status(200).send("El usuario fue creado exitosamente!");
+    res
+      .status(200)
+      .send({ message: "El usuario fue creado exitosamente!", user: newUser });
   }
 };
 
 const updateUser = (req, res) => {
   let obj = JSON.parse(process.env.USERS_ARRAY);
+  let isInArray = obj.some((obj) => obj.ID === req.params.id);
 
-  let update = obj.findIndex((obj) => obj.ID === req.params.id);
+  if (isInArray) {
+    let update = obj.findIndex((obj) => obj.ID === req.params.id);
 
-  obj[update] = {
-    Nombre: req.body.Nombre,
-    Apellido: req.body.Apellido,
-    DNI: req.body.DNI,
-  };
-
-  process.env.USERS_ARRAY = JSON.stringify(obj);
-  res.status(200).send("El usuario fue actualizado exitosamente!");
+    obj[update] = {
+      ID: req.params.id,
+      Nombre: req.body.Nombre,
+      Apellido: req.body.Apellido,
+      DNI: req.body.DNI,
+    };
+    process.env.USERS_ARRAY = JSON.stringify(obj);
+  res
+    .status(200)
+    .send({
+      message: "El usuario fue actualizado exitosamente!",
+      user: obj[update],
+    });
+  } else {
+    res.status(404).send("No existe el ID solicitado");
+  }
+  
 };
 
 const deleteUser = (req, res) => {
   let obj = JSON.parse(process.env.USERS_ARRAY);
   let newObj = obj.filter((obj) => obj.ID !== req.params.id);
   process.env.USERS_ARRAY = JSON.stringify(newObj);
-  res.status(200).send("El usuario fue eliminado exitosamente!");
+  res
+    .status(200)
+    .send({
+      message: `El usuario de ID: ${req.params.id} fue eliminado exitosamente!`,
+    });
 };
 
 const filterUsers = (req, res) => {

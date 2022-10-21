@@ -8,7 +8,7 @@ const api = express.Router();
 const { userController } = require("../controllers");
 
 /* Validators */
-const { validateCreate } = require("../validators/index");
+const { validateCreate } = require("../middlewares/validators/index");
 
 /** BEGIN ROUTES **/
 
